@@ -2,3 +2,12 @@ __pycache__/
 *.py[cod]
 *.log
 .env
+
+# Virtual environments
+.venv/
+venv/
+
+# Build artifacts
+*.egg-info/
+build/
+dist/

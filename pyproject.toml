@@ -1,0 +1,11 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ssPty"
+version = "0.1.0"
+description = "A ptychography simulation and processing package"
+dependencies = [
+    # Add any dependencies here, like "cupy", "numpy", etc.
+]
