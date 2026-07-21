@@ -48,6 +48,7 @@ from ssPty.wave_propagation_cupy.fourier_padding_cupy import fourier_pad, fourie
 
 ```
 ssPty/
+├── engines/               # PIE families for reconstruction (ePIE / mPIE ...)
 ├── RPI_sims/               # RZP simulation setup and generation (vis / X-ray)
 ├── wave_propagation_cupy/  # wave propagation, Fourier padding (CuPy / NumPy)
 ├── fourier_shell_corr/     # Fourier Shell Correlation
