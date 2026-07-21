@@ -1,12 +1,8 @@
 import numpy as np
 import cupy as cp
 
-import sys
-sys.path.append('/home/beams/ONEAL/code/Libraries/misc')
-from fft_wrapper_cupy import fft2_with_shift, ifft2_with_shift
-
-sys.path.append('/home/beams/ONEAL/code/Libraries/wave_propagation_cupy')
-from wave_propagation_cupy_v2 import make_R, propagate_probe
+from ssPty.misc.fft_wrapper_cupy import fft2_with_shift, ifft2_with_shift
+from ssPty.wave_propagation_cupy.wave_propagation_cupy_v2 import make_R, propagate_probe
 
 
 #######################################################################

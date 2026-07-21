@@ -1,9 +1,7 @@
 import numpy as np
 import cupy as cp
 
-import sys
-sys.path.append('/home/beams/ONEAL/code/Libraries/misc')
-from fft_wrapper_cupy import fft2_with_shift, ifft2_with_shift
+from ssPty.misc.fft_wrapper_cupy import fft2_with_shift, ifft2_with_shift
 
 
 def make_R(X_in, Y_in):
