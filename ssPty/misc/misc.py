@@ -1,4 +1,5 @@
 import numpy as np
+import cupy as cp
 import matplotlib
 import matplotlib.pyplot as plt
 import h5py
@@ -9,8 +10,21 @@ import h5py
 #######################################################################
 
 def gaus(arr_in, cen, sig, a=2**16, ph=0.):
-    X, Y = np.meshgrid(np.arange(arr_in.shape[0]), np.arange(arr_in.shape[1]))
-    return a * np.exp(-(X-cen[0])**2/(2*sig**2) - (Y-cen[1])**2/(2*sig**2)).astype('float32') * np.exp(1j*ph)
+    # Compute on the same backend as arr_in (cupy -> stays on GPU, numpy -> CPU).
+    # Use 1D broadcasting instead of full meshgrid arrays, and keep everything in
+    # float32 so a 20k x 20k grid costs ~1.7 GB instead of a 6.9 GB complex128 array.
+    xp = cp.get_array_module(arr_in)
+    # Coerce scalars to plain Python floats: under numpy 2.x (NEP 50) a float32 array
+    # minus a numpy int64 scalar (as cen holds when N_zp comes from HDF5) promotes to
+    # float64, doubling every temporary. Python floats are "weak" and keep it float32.
+    cx, cy = float(cen[0]), float(cen[1])
+    s2 = 2.0 * float(sig)**2
+    x = xp.arange(arr_in.shape[0], dtype=xp.float32)[None, :]
+    y = xp.arange(arr_in.shape[1], dtype=xp.float32)[:, None]
+    g = (a * xp.exp(-((x - cx)**2 + (y - cy)**2) / s2)).astype(xp.float32, copy=False)
+    if ph:
+        g = (g * xp.exp(1j * ph)).astype(xp.complex64)
+    return g
 
 
 #######################################################################

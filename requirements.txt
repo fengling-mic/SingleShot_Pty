@@ -9,8 +9,18 @@ scipy==1.18.0
 setuptools==83.0.0
 tqdm==4.68.4
 wheel==0.47.0
-scikit-image==0.23.6
+scikit-image==0.23.2
 cupy-cuda12x>=12.0.0
+# CUDA 12 runtime libraries required by cupy (libcufft, libcublas, ...); the
+# cupy-cuda12x wheel does not bundle them, so pin them here for reproducibility.
+nvidia-cufft-cu12==11.4.1.4
+nvidia-cublas-cu12==12.9.2.10
+nvidia-cusparse-cu12==12.5.10.65
+nvidia-cusolver-cu12==11.7.5.82
+nvidia-curand-cu12==10.3.10.19
+nvidia-cuda-runtime-cu12==12.9.79
+nvidia-cuda-nvrtc-cu12==12.9.86
+nvidia-nvjitlink-cu12==12.9.86
 Azimuth
 
 -e .
