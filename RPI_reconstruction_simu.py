@@ -1,6 +1,6 @@
 #%%
 import os
-os.environ["CUDA_VISIBLE_DEVICES"] = "3"  # This makes GPU N appear as GPU 0 to CuPy
+os.environ["CUDA_VISIBLE_DEVICES"] = "2"  # This makes GPU N appear as GPU 0 to CuPy
 
 import numpy as np
 from scipy.ndimage import gaussian_filter, median_filter
@@ -34,14 +34,14 @@ def get_fresnel_sample_rate(dz, d1, wv, N):
 use_simple = True
 
 # FZP geometry (um)
-r_zp = 250./2
+r_zp = 10000
 bs_zp = r_zp * 0.3
-outer_width_zp = 50e-3
+outer_width_zp = 12
 # res_zp = 2.3 # 5
-wavelength = 1.24 / 8e3
-sensorPixSize = 172
+wavelength = 0.8
+sensorPixSize = 5.48
 ddet = 10e6
-nPix = 256
+nPix = 1024
 res_obj = get_fresnel_sample_rate(ddet, sensorPixSize, wavelength, nPix)
 res_zp = res_obj
 N_obj_diff = 2048
@@ -55,7 +55,8 @@ c = 299792458  # Speed of light in m/s
 J_eV = 1.60217663e-19  # Elementary charge in C
 lambda_to_eV = lambda lam_in: (h * c) / (lam_in * J_eV)
 
-data_path = 'Y:\\fengling\\RIP_simu_data\\'
+# data_path = 'Y:\\fengling\\RIP_simu_data\\'
+data_path = '/mnt/micdata3/fengling/RPI_sim/'
 zp_sim_design_fname = data_path + 'h5_all/zp_sim_design_xray_d%dum_ow%dnm_px%dnm.h5' %(r_zp*2, outer_width_zp*1e3, res_zp*1e3)
 zp_sim_diff_patterns_fname = data_path + 'h5_all/zp_sim_diff_patterns_d%dum_ow%dnm_px%dnm_%s_%ddiffpix.h5' %(r_zp*2, outer_width_zp*1e3, res_zp*1e3, material_key, N_obj_diff)
 

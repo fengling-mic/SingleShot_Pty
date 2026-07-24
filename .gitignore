@@ -11,3 +11,7 @@ venv/
 *.egg-info/
 build/
 dist/
+
+# Local tool/session artifacts
+settings.json
+.loglogin
